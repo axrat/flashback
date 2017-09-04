@@ -22,10 +22,13 @@ $mon += 1;
 
 my $timestamp = "$year/$mon/$mday";
 
-open(FH,">> ".$changelog);
-print FH "###### ".$timestamp."\n";
-print FH "![".$timestamp."](".$rawgit.$img.")\n";
-close(FH);
+#open(FH,">> ".$changelog);
+#print FH "###### ".$timestamp."\n";
+#print FH "![".$timestamp."](".$rawgit.$img.")\n";
+#close(FH);
+
+system('echo "'."![".$timestamp."](".$rawgit.$img.")".'" | perl append-header.pl CHANGELOG');
+system('echo "'."###### ".$timestamp.'" | perl append-header.pl CHANGELOG');
 
 $mergeresult = system("./merge.pl README CHANGELOG > README.md");
 print "mergeresult:".$mergeresult."\n";
